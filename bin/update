@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Update this repo
+git pull
+
 # Update docker images
 docker-compose pull
 
