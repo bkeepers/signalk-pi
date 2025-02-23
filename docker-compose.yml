@@ -27,8 +27,8 @@ services:
       # - PLEX_CLAIM= #optional
     volumes:
       - /external/data/plex:/config
-      - /external/tv:/tv
-      - /external/movies:/movies
+      - /external/media/TV:/tv
+      - /external/media/Movies:/movies
     restart: unless-stopped
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -38,8 +38,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /external/data/sonar:/config
-      - /external/tv:/tv #optional
+      - /external/data/sonarr:/config
+      - /external/media/TV:/tv #optional
       - /external/downloads:/downloads #optional
     ports:
       - 8989:8989
@@ -53,7 +53,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /external/data/radarr:/config
-      - /external/movies:/movies #optional
+      - /external/media/Movies:/movies #optional
       - /external/downloads:/downloads #optional
     ports:
       - 7878:7878
