@@ -78,6 +78,8 @@ services:
     restart: unless-stopped
     network_mode: host
     environment:
+      - PUID=1000
+      - PGID=1000
       - PORT=3000 # (2/5)
     volumes:
       - /dev:/dev
