@@ -1,5 +1,5 @@
 #!/bin/sh
 
-sudo apt install docker
+sudo apt install docker.io
 
 docker compose up -d
