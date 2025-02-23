@@ -2,4 +2,4 @@
 
 curl -sSL https://get.docker.com | sh
 
-docker-compose up -d
+docker compose up -d
