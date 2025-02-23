@@ -1,13 +1,15 @@
 #!/bin/sh
 
+set -e
+
 # Update this repo
 git pull
 
 # Update docker images
-docker-compose pull
+sudo docker-compose pull
 
 # Update running containers
-docker-compose up -d
+sudo docker-compose up -d
 
 # Remove old images
-docker image prune
+sudo docker image prune
