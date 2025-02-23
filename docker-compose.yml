@@ -29,6 +29,7 @@ services:
       - /external/data/plex:/config
       - /external/media/TV:/tv
       - /external/media/Movies:/movies
+      - /dev/dri:/dev/dri # hardware acceleration
     restart: unless-stopped
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
