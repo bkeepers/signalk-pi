@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Update docker images
+docker-compose pull
+
+# Update running containers
+docker-compose up -d
+
+# Remove old images
+docker image prune

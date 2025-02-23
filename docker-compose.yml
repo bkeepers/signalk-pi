@@ -1,0 +1,88 @@
+---
+services:
+  # # https://github.com/gethomepage/homepage
+  # homepage:
+  #   image: ghcr.io/gethomepage/homepage:latest
+  #   container_name: homepage
+  #   environment:
+  #     PUID: 1000 # optional, your user id
+  #     PGID: 1000 # optional, your group id
+  #   ports:
+  #     - 80:3000
+  #   volumes:
+  #     - /external/data/homepage:/app/config # Make sure your local config directory exists
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
+  #   restart: unless-stopped
+  # https://hub.docker.com/r/linuxserver/plex
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - VERSION=docker
+      # https://plex.tv/claim (expires within 4 minutes)
+      # - PLEX_CLAIM= #optional
+    volumes:
+      - /external/data/plex:/config
+      - /external/tv:/tv
+      - /external/movies:/movies
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /external/data/sonar:/config
+      - /external/tv:/tv #optional
+      - /external/downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /external/data/radarr:/config
+      - /external/movies:/movies #optional
+      - /external/downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /external/data/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+  # https://github.com/SignalK/signalk-server/blob/master/docker/docker-compose.yml
+  signalk:
+    image: cr.signalk.io/signalk/signalk-server:latest
+    container_name: signalk
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PORT=3000 # (2/5)
+    volumes:
+      - /dev:/dev
+      - /external/data/signalk:/home/node/.signalk
+    entrypoint: sh /home/node/signalk/startup.sh
+    privileged: true
+    logging:
+      options:
+        max-size: 10m
