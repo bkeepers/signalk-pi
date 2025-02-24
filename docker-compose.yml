@@ -71,3 +71,16 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
+  influxdb:
+    image: "influxdb:latest"
+    ports:
+      - "8086:8086"
+    volumes:
+      - "/external/data/influxdb:/data"
+    environment:
+      - INFLUXDB_HTTP_AUTH_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=whatyougiveuptogetit
+      - INFLUXDB_USER=signalk
+      - INFLUXDB_USER_PASSWORD=pi
+      - INFLUXDB_DB=whatyougiveuptogetit
