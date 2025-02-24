@@ -71,21 +71,3 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
-  # https://github.com/SignalK/signalk-server/blob/master/docker/docker-compose.yml
-  signalk:
-    image: cr.signalk.io/signalk/signalk-server:latest
-    container_name: signalk
-    restart: unless-stopped
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - PORT=3000 # (2/5)
-    volumes:
-      - /dev:/dev
-      - /external/data/signalk:/home/node/.signalk
-    entrypoint: sh /home/node/signalk/startup.sh
-    privileged: true
-    logging:
-      options:
-        max-size: 10m
