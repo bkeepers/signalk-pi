@@ -78,6 +78,7 @@ services:
       - "8086:8086"
     volumes:
       - "/home/pi/influxdb:/var/lib/influxdb2"
+      - "/home/pi/influxdb:/etc/influxdb2"
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=pi
@@ -86,5 +87,6 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=signalk
   grafana:
     image: "grafana/grafana"
+    container_name: grafana
     ports:
       - "3001:3000"
