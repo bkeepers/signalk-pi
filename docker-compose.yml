@@ -90,9 +90,10 @@ services:
     image: "grafana/grafana"
     container_name: grafana
     restart: unless-stopped
-    network_mode: host
     user: 1000:1000
     ports:
       - "3001:3000"
     volumes:
       - /home/pi/grafana:/var/lib/grafana
+    links:
+      - influxdb
