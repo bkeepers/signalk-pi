@@ -93,4 +93,4 @@ services:
     ports:
       - "3001:3000"
     volumes:
-      - /external/data/grafana:/var/lib/grafana
+      - /home/pi/grafana:/var/lib/grafana
