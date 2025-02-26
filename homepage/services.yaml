@@ -1,0 +1,47 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Boat:
+    - Grafana:
+        href: http://pi.local:3001/
+        icon: grafana.png
+        description: Graphs the boat data
+        server: local-docker
+        container: grafana
+    - Signal K:
+        href: http://pi.local:3000/
+        icon: http://pi.local:3000/admin/img/favicon.ico
+        description: Collects the boat data
+    - InfluxDB:
+        href: http://pi.local:8086/
+        icon: influxdb.png
+        description: Stores the boat data
+        server: local-docker
+        container: influxdb
+
+- Media:
+    - Plex:
+        href: http://pi.local:32400/
+        icon: plex.png
+        server: local-docker
+        container: plex
+        widget:
+          type: plex
+          url: http://pi.local:32400/
+          key: "sjB4UesLDrmz-Z-Ss6Yz"
+    - Radarr:
+        href: http://pi.local:7878/
+        icon: radarr.png
+        server: local-docker
+        container: radarr
+    - Prowlarr:
+        href: http://pi.local:9696/
+        icon: prowlarr.png
+        server: local-docker
+        container: prowlarr
+    - Sonarr:
+        href: http://pi.local:8989/
+        icon: sonarr.png
+        server: local-docker
+        container: sonarr
