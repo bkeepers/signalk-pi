@@ -26,10 +26,6 @@
         icon: plex.png
         server: local-docker
         container: plex
-        widget:
-          type: plex
-          url: http://pi.local:32400/
-          key: "sjB4UesLDrmz-Z-Ss6Yz"
     - Radarr:
         href: http://pi.local:7878/
         icon: radarr.png
