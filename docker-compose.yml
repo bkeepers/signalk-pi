@@ -26,6 +26,20 @@ services:
       - /home/pi/grafana:/var/lib/grafana
     links:
       - influxdb
+
+  signalk:
+    image: ghcr.io/signalk/signalk-server:${SIGNALK_VERSION:-latest}
+    container_name: signalk-server
+    restart: unless-stopped
+    # Run as privileged to access bluetooth, etc
+    privileged: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ~/.signalk:/home/node/.signalk
+      # Use a aeparate volume for plugin modules so native modules don't conflict with host system
+      - /home/node/.signalk/node_modules
+
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
