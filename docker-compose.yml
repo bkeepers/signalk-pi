@@ -31,14 +31,14 @@ services:
     image: ghcr.io/signalk/signalk-server:${SIGNALK_VERSION:-latest}
     container_name: signalk-server
     restart: unless-stopped
-    # Run as privileged to access bluetooth, etc
-    privileged: true
     ports:
       - "3000:3000"
+      - "10110:10110"
     volumes:
       - ~/.signalk:/home/node/.signalk
-      # Use a aeparate volume for plugin modules so native modules don't conflict with host system
-      - /home/node/.signalk/node_modules
+      - /var/run/dbus:/var/run/dbus
+    # Run as privileged to access bluetooth, etc
+    privileged: true
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -49,6 +49,7 @@ services:
     volumes:
       - ./homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
