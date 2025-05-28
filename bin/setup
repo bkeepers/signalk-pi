@@ -6,6 +6,16 @@ if [ -x "$(command -v docker)" ]; then
 else
   echo "Installing Docker..."
   curl -sSL https://get.docker.com | sh
+
+  # Add docker group
+  sudo groupadd docker || true
+  # Add the current user to the docker group
+  sudo usermod -aG docker $USER
+  # Activate the new group
+  newgrp docker
+
+  # Start the Docker service
+  sudo service docker start
 fi
 
 docker compose up -d
