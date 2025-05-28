@@ -30,7 +30,7 @@ services:
   signalk:
     image: ghcr.io/signalk/signalk-server:${SIGNALK_VERSION:-latest}
     container_name: signalk-server
-    user: ${UID:-1000):${GID-1000}
+    user: 1000:1000
     restart: unless-stopped
     ports:
       - 3000:3000
