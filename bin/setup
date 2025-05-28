@@ -1,5 +1,11 @@
 #!/bin/sh
 
-curl -sSL https://get.docker.com | sh
+
+if [ -x "$(command -v docker)" ]; then
+  echo "Docker is already installed."
+else
+  echo "Installing Docker..."
+  curl -sSL https://get.docker.com | sh
+fi
 
 docker compose up -d
