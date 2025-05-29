@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 # Backup all Docker volumes to a timestamped directory
 
 set -e
@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 # Load environment variables
-. .env
+source .env
 
 TIMESTAMP=$(date +"%Y%m%d%H%M")
 DIR="./backups/${TIMESTAMP}"

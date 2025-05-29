@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 echo "Updating the system..."
 sudo apt update
@@ -30,6 +30,14 @@ else
 
   # Start the Docker service
   sudo service docker start
+fi
+
+if ! grep -q signalk-to-influxdb2 ~/.signalk/package.json; then
+  echo "Installing signalk-to-influxdb2..."
+  docker compose down signalk
+  docker compose up -d influxdb
+  docker compose run --rm -v ${PWD}:/src --entrypoint bash signalk -c "npm signalk install signalk-to-influxdb2 && \
+    cp /src/plugin-config-data/signalk-to-influxdb2.json plugin-config-data"
 fi
 
 docker compose up -d
