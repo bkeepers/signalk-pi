@@ -40,6 +40,8 @@ services:
       - /var/run/dbus:/var/run/dbus
     # Run as privileged to access bluetooth, etc
     privileged: true
+    links:
+      - influxdb
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
