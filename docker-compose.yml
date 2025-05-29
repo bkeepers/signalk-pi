@@ -29,7 +29,7 @@ services:
 
   signalk:
     image: ghcr.io/signalk/signalk-server:${SIGNALK_VERSION:-latest}
-    container_name: signalk-server
+    container_name: signalk
     user: 1000:1000
     restart: unless-stopped
     ports:

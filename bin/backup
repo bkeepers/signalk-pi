@@ -1,0 +1,13 @@
+#!/bin/sh
+# Backup all Docker volumes to a timestamped directory
+
+DIR="./backups/$(date +"%Y%m%d%H%M")"
+VOLUMES=$(docker volume ls -f driver=local --format "{{.Name}}")
+mkdir -p $DIR
+
+for volume in $VOLUMES; do
+  echo "Backing up volume: $volume"
+  docker run --rm -v $volume:/data -v $DIR:/backup alpine tar -cvzf /backup/${volume}.tar.gz -C /data .
+done
+
+tar -cvzf $DIR/signalk.tar.gz -C ~/.signalk .
