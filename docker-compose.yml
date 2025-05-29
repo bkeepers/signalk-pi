@@ -15,6 +15,7 @@ services:
       - DOCKER_INFLUXDB_INIT_PASSWORD=${DOCKER_INFLUXDB_INIT_PASSWORD:-password}
       - DOCKER_INFLUXDB_INIT_ORG=${DOCKER_INFLUXDB_INIT_ORG:-signalk}
       - DOCKER_INFLUXDB_INIT_BUCKET=${DOCKER_INFLUXDB_INIT_ORG:-signalk}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB2_TOKEN}
   grafana:
     image: grafana/grafana
     container_name: grafana
