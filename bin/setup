@@ -1,5 +1,13 @@
 #!/bin/sh
 
+echo "Updating the system..."
+sudo apt update
+sudo apt full-upgrade
+
+if ! dpkg -l | grep -q unattended-upgrades; then
+  echo "Installing unattended-upgrades..."
+  sudo apt install -y unattended-upgrades
+fi
 
 if [ -x "$(command -v docker)" ]; then
   echo "Docker is already installed."
