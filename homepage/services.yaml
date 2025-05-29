@@ -19,3 +19,9 @@
         description: Stores the boat data
         server: local-docker
         container: influxdb
+    - Portainer:
+        href: http://pi.local:9000/
+        icon: portainer.png
+        description: Manage docker containers
+        server: local-docker
+        container: portainer

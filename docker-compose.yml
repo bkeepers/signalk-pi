@@ -7,8 +7,8 @@ services:
     ports:
       - 8086:8086
     volumes:
-      - /var/lib/influxdb2
-      - /etc/influxdb2
+      - influxdb_data:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=${DOCKER_INFLUXDB_INIT_USERNAME:-admin}
@@ -23,7 +23,7 @@ services:
     ports:
       - 3001:3000
     volumes:
-      - /var/lib/grafana
+      - grafana_data:/var/lib/grafana
     links:
       - influxdb
 
@@ -50,3 +50,21 @@ services:
     volumes:
       - ./homepage:/app/config
       - /var/run/docker.sock:/var/run/docker.sock # Enable docker integeration
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:lts
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+      - 9000:9000
+      - 9443:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  influxdb_config:
+  influxdb_data:
+  portainer_data:
+  grafana_data:
