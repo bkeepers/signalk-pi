@@ -1,8 +1,17 @@
 #!/bin/sh
 # Backup all Docker volumes to a timestamped directory
 
-DIR="./backups/$(date +"%Y%m%d%H%M")"
-VOLUMES=$(docker volume ls -f driver=local --format "{{.Name}}")
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Load environment variables
+. .env
+
+TIMESTAMP=$(date +"%Y%m%d%H%M")
+DIR="./backups/${TIMESTAMP}"
+VOLUMES=$(docker volume ls -f driver=local --format "{{.Name}}" | grep -v influxdb)
+
 mkdir -p $DIR
 
 for volume in $VOLUMES; do
@@ -10,4 +19,10 @@ for volume in $VOLUMES; do
   docker run --rm -v $volume:/data -v $DIR:/backup alpine tar -cvzf /backup/${volume}.tar.gz -C /data .
 done
 
-tar -cvzf $DIR/signalk.tar.gz -C ~/.signalk .
+echo "Backing up InfluxDB"
+docker compose exec influxdb influx backup /backups/${TIMESTAMP}/influxdb -t "$INFLUXDB2_TOKEN"
+
+echo "Backing up Signal K data"
+tar -czf $DIR/signalk.tar.gz -C ~/.signalk .
+
+echo "Backup completed in $DIR"
