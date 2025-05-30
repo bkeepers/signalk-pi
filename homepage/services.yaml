@@ -3,16 +3,16 @@
 # https://gethomepage.dev/configs/services/
 
 - Boat:
+    - Signal K:
+        href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/
+        icon: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/admin/img/favicon.ico
+        description: Collects the boat data
     - Grafana:
         href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3001/
         icon: grafana.png
         description: Graphs the boat data
         server: local-docker
         container: grafana
-    - Signal K:
-        href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/
-        icon: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/admin/img/favicon.ico
-        description: Collects the boat data
     - InfluxDB:
         href: http://{{HOMEPAGE_VAR_HOSTNAME}}:8086/
         icon: influxdb.png
