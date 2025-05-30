@@ -1,0 +1,28 @@
+{
+  "configuration": {
+    "outputDailyLog": false,
+    "influxes": [
+      {
+        "url": "http://influxdb:8086",
+        "token": "INFLUXDB2_TOKEN",
+        "bucket": "signalk",
+        "onlySelf": true,
+        "filteringRules": [],
+        "ignoredPaths": [],
+        "ignoredSources": [],
+        "useSKTimestamp": true,
+        "resolution": 1000,
+        "writeOptions": {
+          "defaultTags": {},
+          "headers": {},
+          "writeRetrySkipped": {},
+          "flushInterval": 5000,
+          "consistency": "one"
+        },
+        "org": "signalk"
+      }
+    ]
+  },
+  "enabled": true,
+  "enableLogging": false
+}

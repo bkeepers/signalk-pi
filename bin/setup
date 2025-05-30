@@ -33,12 +33,14 @@ else
   sudo service docker start
 fi
 
-if ! grep -q signalk-to-influxdb2 ~/.signalk/package.json; then
-  echo "Installing signalk-to-influxdb2..."
-  docker compose down signalk
-  docker compose up -d influxdb
-  docker compose run --rm -v ${PWD}:/src --entrypoint bash signalk -c "npm signalk install signalk-to-influxdb2 && \
-    cp /src/plugin-config-data/signalk-to-influxdb2.json plugin-config-data"
-fi
-
 docker compose up -d
+
+if ! grep -q signalk-to-influxdb2 ~/.signalk/package.json; then
+  echo "Configuring signalk-to-influxdb2..."
+
+  docker compose exec signalk npm install signalk-to-influxdb2
+  cp plugin-config-data/signalk-to-influxdb2.json ~/.signalk/plugin-config-data/signalk-to-influxdb2.json
+
+  # Replace INFLUXDB2_TOKEN in the config file
+  sed -i "s/INFLUXDB2_TOKEN/${INFLUXDB2_TOKEN}/g" ~/.signalk/plugin-config-data/signalk-to-influxdb2.json
+fi
