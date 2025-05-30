@@ -7,6 +7,8 @@
         href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/
         icon: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/admin/img/favicon.ico
         description: Collects the boat data
+        server: local-docker
+        container: signalk
     - Grafana:
         href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3001/
         icon: grafana.png
