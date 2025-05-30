@@ -23,7 +23,7 @@ bin/setup
 <table>
 <tr>
 <td><img alt="Homepage" src="https://github.com/user-attachments/assets/c1ca5441-a152-410e-9221-2dfa01f05dcb" /></td>
-<td><img alt="Signal K" src="https://github.com/user-attachments/assets/538c19f5-4009-42c9-90b4-b0d1b46ca84d"/></td>
+<td><img alt="Signal K" src="https://github.com/user-attachments/assets/b5fffa47-bb95-4f32-b978-381f92fd4a33" /></td>
 </tr>
 <tr>
 <td><img alt="Grafana" src="https://github.com/user-attachments/assets/f91cb05c-85ac-4af9-9e8a-55c00fd2be57" /></td>
