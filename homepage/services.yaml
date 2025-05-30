@@ -4,23 +4,23 @@
 
 - Boat:
     - Grafana:
-        href: http://pi.local:3001/
+        href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3001/
         icon: grafana.png
         description: Graphs the boat data
         server: local-docker
         container: grafana
     - Signal K:
-        href: http://pi.local:3000/
-        icon: http://pi.local:3000/admin/img/favicon.ico
+        href: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/
+        icon: http://{{HOMEPAGE_VAR_HOSTNAME}}:3000/admin/img/favicon.ico
         description: Collects the boat data
     - InfluxDB:
-        href: http://pi.local:8086/
+        href: http://{{HOMEPAGE_VAR_HOSTNAME}}:8086/
         icon: influxdb.png
         description: Stores the boat data
         server: local-docker
         container: influxdb
     - Portainer:
-        href: http://pi.local:9000/
+        href: http://{{HOMEPAGE_VAR_HOSTNAME}}:9000/
         icon: portainer.png
         description: Manage docker containers
         server: local-docker

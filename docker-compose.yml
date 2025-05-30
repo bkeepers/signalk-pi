@@ -54,6 +54,9 @@ services:
     volumes:
       - ./homepage:/app/config
       - /var/run/docker.sock:/var/run/docker.sock # Enable docker integeration
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=${HOSTNAME:-localhost}
+      - HOMEPAGE_VAR_HOSTNAME=${HOSTNAME:-localhost}
 
   portainer:
     container_name: portainer

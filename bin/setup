@@ -11,7 +11,8 @@ fi
 
 if ! [ -f .env ]; then
   echo "Creating .env file..."
-  echo "SIGNALK_VERSION=latest" > .env
+  echo "HOSTNAME=$(hostname).local" >> .env
+  echo "SIGNALK_VERSION=latest" >> .env
   echo "INFLUXDB2_TOKEN=$(openssl rand -base64 20)" >> .env
 fi
 
