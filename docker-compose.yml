@@ -44,6 +44,8 @@ services:
     privileged: true
     links:
       - influxdb
+    cap_add:
+      - NET_ADMIN
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
