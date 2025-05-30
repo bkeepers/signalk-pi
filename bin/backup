@@ -9,7 +9,7 @@ cd "$(dirname "$0")/.."
 source .env
 
 TIMESTAMP=$(date +"%Y%m%d%H%M")
-DIR="./backups/${TIMESTAMP}"
+DIR="./backups/$(hostname)-${TIMESTAMP}"
 VOLUMES=$(docker volume ls -f driver=local --format "{{.Name}}" | grep -v influxdb)
 
 mkdir -p $DIR
