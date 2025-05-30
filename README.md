@@ -1,6 +1,6 @@
-# Semi-automated Signal K
+# Signal K + Raspberry Pi setup
 
-This repo automates my [Signal K](https://signalk.org/) installation on a Raspberry Pi.
+This is my semi-automated [Signal K](https://signalk.org/) setup on a Raspberry Pi.
 
 ## Installation
 
