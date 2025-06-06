@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -e
+
 echo "Updating the system..."
 sudo apt update
 sudo apt full-upgrade
@@ -33,14 +35,19 @@ else
   sudo service docker start
 fi
 
-docker compose up -d
+if ! [ -d ~/.signalk ]; then
+  echo "Setting up Signal K directory..."
+  # Manualy create this, otherwise the docker container tries but creates it as root
+  mkdir -p ~/.signalk
+  docker compose run -it --rm --entrypoint signalk-server-setup signalk
+  cp plugin-config-data/signalk-to-influxdb2.json ~/.signalk/plugin-config-data/signalk-to-influxdb2.json
 
-if ! grep -q signalk-to-influxdb2 ~/.signalk/package.json; then
   echo "Configuring signalk-to-influxdb2..."
   docker compose exec signalk npm install signalk-to-influxdb2
   cp plugin-config-data/signalk-to-influxdb2.json ~/.signalk/plugin-config-data/signalk-to-influxdb2.json
   sed -i "s/INFLUXDB2_TOKEN/${INFLUXDB2_TOKEN}/g" ~/.signalk/plugin-config-data/signalk-to-influxdb2.json
-  docker compose restart signalk
 fi
+
+docker compose up -d
 
 echo "Setup completed successfully. Check out http://$(hostname).local"
